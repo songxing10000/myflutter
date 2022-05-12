@@ -1,9 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter/MyAppBar.dart';
+import 'SelectContactSheet.dart';
+import 'InvoicingRequirementSheet.dart';
+import 'FeedbackTimeRequirementSheet.dart';
 
+// ignore: must_be_immutable
 class ReleaseRequirement2Page extends StatefulWidget {
-  const ReleaseRequirement2Page({Key? key}) : super(key: key);
+  /// 联系方式类型
+  ContactInfoType contactType;
+
+  /// 开票要求类型
+  InvoicingRequirementType invoicType;
+
+  /// 反馈时间要求类型
+  FeedbackTimeTequirementType FeedbackTimeType;
+  ReleaseRequirement2Page(
+      {Key? key,
+      this.contactType = ContactInfoType.Unlimited,
+      this.invoicType = InvoicingRequirementType.NoRequirement,
+      this.FeedbackTimeType = FeedbackTimeTequirementType.NoRequirement})
+      : super(key: key);
 
   @override
   State<ReleaseRequirement2Page> createState() =>
@@ -13,45 +29,6 @@ class ReleaseRequirement2Page extends StatefulWidget {
 class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
   @override
   Widget build(BuildContext context) {
-    Widget myCell(
-        {required double topM,
-        required String title,
-        required String subTitle,
-        bool isLast = false}) {
-      return Column(
-        children: [
-          SizedBox(height: topM),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
-              title,
-              style: const TextStyle(
-                  fontFamily: 'PingFangSC-Medium,PingFang SC',
-                  fontSize: 16,
-                  color: Color(0xFF333333)),
-            ),
-            const SizedBox(
-              width: 24,
-            ),
-            Expanded(
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    subTitle,
-                    style: const TextStyle(
-                        fontFamily: 'PingFangSC-Regular,PingFang SC',
-                        fontSize: 16,
-                        color: Color(0xFF666666)),
-                    maxLines: 10,
-                  )),
-            )
-          ]),
-          const SizedBox(height: 12),
-          // 这里，这个，if一行语句，不错
-          if (!isLast) Container(color: const Color(0xFFF7F7F7), height: 1)
-        ],
-      );
-    }
-
     var detailDemandInfoView = Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -86,19 +63,41 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
             SizedBox(
               height: 12,
             ),
-            Row(
-              children: [
-                Text(
-                  '不限联系方式',
-                  style: TextStyle(
-                      fontFamily: 'PingFangSC-Regular',
-                      fontSize: 13,
-                      color: Color(0xFF999999)),
-                ),
-                Spacer(),
-                Image.asset('images/iconright.png'),
-              ],
-            ),
+            InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12.0),
+                          topRight: Radius.circular(12.0),
+                        ),
+                      ),
+                      builder: (context) {
+                        return SelectContactSheet(
+                          type: widget.contactType,
+                          onTap: (String str) {
+                            setState(() {
+                              widget.contactType = ContactInfoTypeFromStr(str);
+                            });
+                          },
+                        );
+                      });
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      strFromContactInfoType(widget.contactType),
+                      style: TextStyle(
+                          fontFamily: 'PingFangSC-Regular',
+                          fontSize: 13,
+                          color: Color(0xFF999999)),
+                    ),
+                    Spacer(),
+                    Image.asset('images/iconright.png'),
+                  ],
+                )),
             SizedBox(
               height: 12,
             ),
@@ -120,19 +119,23 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
             SizedBox(
               height: 12,
             ),
-            Row(
-              children: [
-                Text(
-                  '不限联系时间',
-                  style: TextStyle(
-                      fontFamily: 'PingFangSC-Regular',
-                      fontSize: 13,
-                      color: Color(0xFF999999)),
-                ),
-                Spacer(),
-                Image.asset('images/iconright.png'),
-              ],
-            ),
+            InkWell(
+                onTap: () {
+                  print("d333");
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      '不限联系时间',
+                      style: TextStyle(
+                          fontFamily: 'PingFangSC-Regular',
+                          fontSize: 13,
+                          color: Color(0xFF999999)),
+                    ),
+                    Spacer(),
+                    Image.asset('images/iconright.png'),
+                  ],
+                )),
           ],
         ));
 
@@ -168,18 +171,42 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
           SizedBox(
             height: 12,
           ),
-          Row(
-            children: [
-              Text(
-                '无要求',
-                style: TextStyle(
-                    fontFamily: 'PingFangSC-Regular',
-                    fontSize: 13,
-                    color: Color(0xFF999999)),
-              ),
-              Spacer(),
-              Image.asset('images/iconright.png'),
-            ],
+          InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12.0),
+                      topRight: Radius.circular(12.0),
+                    ),
+                  ),
+                  builder: (context) {
+                    return FeedbackTimeRequirementSheet(
+                      type: widget.FeedbackTimeType,
+                      onTap: (String str) {
+                        setState(() {
+                          widget.FeedbackTimeType =
+                              FeedbackTimeTequirementTypeFromStr(str);
+                        });
+                      },
+                    );
+                  });
+            },
+            child: Row(
+              children: [
+                Text(
+                  strFromFeedbackTimeTequirementType(widget.FeedbackTimeType),
+                  style: TextStyle(
+                      fontFamily: 'PingFangSC-Regular',
+                      fontSize: 13,
+                      color: Color(0xFF999999)),
+                ),
+                Spacer(),
+                Image.asset('images/iconright.png'),
+              ],
+            ),
           ),
           SizedBox(
             height: 12,
@@ -193,7 +220,7 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
             height: 24,
           ),
           Text(
-            '开票时间',
+            '开票要求',
             style: TextStyle(
                 fontFamily: 'PingFangSC-Medium',
                 fontSize: 16,
@@ -202,18 +229,42 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
           SizedBox(
             height: 12,
           ),
-          Row(
-            children: [
-              Text(
-                '无要求',
-                style: TextStyle(
-                    fontFamily: 'PingFangSC-Regular',
-                    fontSize: 13,
-                    color: Color(0xFF999999)),
-              ),
-              Spacer(),
-              Image.asset('images/iconright.png'),
-            ],
+          InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12.0),
+                      topRight: Radius.circular(12.0),
+                    ),
+                  ),
+                  builder: (context) {
+                    return InvoicingRequirementSheet(
+                      type: widget.invoicType,
+                      onTap: (String str) {
+                        setState(() {
+                          widget.invoicType =
+                              InvoicingRequirementTypeFromStr(str);
+                        });
+                      },
+                    );
+                  });
+            },
+            child: Row(
+              children: [
+                Text(
+                  strFromInvoicingRequirementType(widget.invoicType),
+                  style: TextStyle(
+                      fontFamily: 'PingFangSC-Regular',
+                      fontSize: 13,
+                      color: Color(0xFF999999)),
+                ),
+                Spacer(),
+                Image.asset('images/iconright.png'),
+              ],
+            ),
           ),
         ]));
 

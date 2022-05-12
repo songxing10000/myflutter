@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           '/canCelDemand': (BuildContext context) => const CancelDemandPage(),
           '/TabTest': (BuildContext context) => const TabTestView(),
           '/ReleaseRequirement2Page': (BuildContext context) =>
-              const ReleaseRequirement2Page(),
+              ReleaseRequirement2Page(),
           '/ReleaseRequirement3Page': (BuildContext context) =>
               const ReleaseRequirement3Page(),
           '/ReleaseRequirement4Page': (BuildContext context) =>

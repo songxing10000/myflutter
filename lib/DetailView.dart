@@ -198,7 +198,7 @@ class _DetailViewState extends State<DetailView> {
           ]),
         ),
         Container(
-          height: MediaQuery.of(context).padding.bottom,
+          height: MediaQuery.of(context).padding.bottom, //iphonex
           color: Colors.white,
         )
       ],
