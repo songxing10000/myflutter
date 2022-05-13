@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:myflutter/MyAppBar.dart';
-import 'SelectContactSheet.dart';
-import 'InvoicingRequirementSheet.dart';
-import 'FeedbackTimeRequirementSheet.dart';
+import 'SelectStrsSheet.dart';
 
 // ignore: must_be_immutable
 class ReleaseRequirement2Page extends StatefulWidget {
-  /// 联系方式类型
-  ContactInfoType contactType;
+  /// 联系方式
+  String ContactInfoTitle = '联系方式';
+  List<String> ContactInfoStrs = ["隐私电话", "企业微信", "不限联系方式"];
+  int ContactInfoSelectedIdx = 2;
 
-  /// 开票要求类型
-  InvoicingRequirementType invoicType;
+  /// 开票要求
+  String InvoicingTitle = '开票要求';
+  List<String> InvoicingStrs = ["普通电子发票", "增值税专用发票", "无要求"];
+  int InvoicingSelectedIdx = 2;
 
-  /// 反馈时间要求类型
-  FeedbackTimeTequirementType FeedbackTimeType;
-  ReleaseRequirement2Page(
-      {Key? key,
-      this.contactType = ContactInfoType.Unlimited,
-      this.invoicType = InvoicingRequirementType.NoRequirement,
-      this.FeedbackTimeType = FeedbackTimeTequirementType.NoRequirement})
-      : super(key: key);
+  /// 反馈时间要求
+  String FeedbackTimeTitle = '反馈时间要求';
+  List<String> FeedbackTimeStrs = ["不需要定期反馈", "需要定期反馈", "无要求"];
+  int FeedbackTimeSelectedIdx = 2;
+  ReleaseRequirement2Page({Key? key}) : super(key: key);
 
   @override
   State<ReleaseRequirement2Page> createState() =>
@@ -75,11 +74,13 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
                         ),
                       ),
                       builder: (context) {
-                        return SelectContactSheet(
-                          type: widget.contactType,
-                          onTap: (String str) {
+                        return SelectStrsSheet(
+                          title: widget.ContactInfoTitle,
+                          selecteStrs: widget.ContactInfoStrs,
+                          selectedIdx: widget.ContactInfoSelectedIdx,
+                          onTap: (int newSelectedIdx) {
                             setState(() {
-                              widget.contactType = ContactInfoTypeFromStr(str);
+                              widget.ContactInfoSelectedIdx = newSelectedIdx;
                             });
                           },
                         );
@@ -88,7 +89,7 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
                 child: Row(
                   children: [
                     Text(
-                      strFromContactInfoType(widget.contactType),
+                      widget.ContactInfoStrs[widget.ContactInfoSelectedIdx],
                       style: TextStyle(
                           fontFamily: 'PingFangSC-Regular',
                           fontSize: 13,
@@ -183,12 +184,13 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
                     ),
                   ),
                   builder: (context) {
-                    return FeedbackTimeRequirementSheet(
-                      type: widget.FeedbackTimeType,
-                      onTap: (String str) {
+                    return SelectStrsSheet(
+                      title: widget.FeedbackTimeTitle,
+                      selecteStrs: widget.FeedbackTimeStrs,
+                      selectedIdx: widget.FeedbackTimeSelectedIdx,
+                      onTap: (int newSelectedIndex) {
                         setState(() {
-                          widget.FeedbackTimeType =
-                              FeedbackTimeTequirementTypeFromStr(str);
+                          widget.FeedbackTimeSelectedIdx = newSelectedIndex;
                         });
                       },
                     );
@@ -197,7 +199,7 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
             child: Row(
               children: [
                 Text(
-                  strFromFeedbackTimeTequirementType(widget.FeedbackTimeType),
+                  widget.FeedbackTimeStrs[widget.FeedbackTimeSelectedIdx],
                   style: TextStyle(
                       fontFamily: 'PingFangSC-Regular',
                       fontSize: 13,
@@ -241,12 +243,13 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
                     ),
                   ),
                   builder: (context) {
-                    return InvoicingRequirementSheet(
-                      type: widget.invoicType,
-                      onTap: (String str) {
+                    return SelectStrsSheet(
+                      title: widget.InvoicingTitle,
+                      selecteStrs: widget.InvoicingStrs,
+                      selectedIdx: widget.InvoicingSelectedIdx,
+                      onTap: (int newSelectedIndex) {
                         setState(() {
-                          widget.invoicType =
-                              InvoicingRequirementTypeFromStr(str);
+                          widget.InvoicingSelectedIdx = newSelectedIndex;
                         });
                       },
                     );
@@ -255,7 +258,7 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
             child: Row(
               children: [
                 Text(
-                  strFromInvoicingRequirementType(widget.invoicType),
+                  widget.InvoicingStrs[widget.InvoicingSelectedIdx],
                   style: TextStyle(
                       fontFamily: 'PingFangSC-Regular',
                       fontSize: 13,
