@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myflutter/MyAppBar.dart';
 import 'SelectStrsSheet.dart';
+import 'SelectTimeSheet.dart';
 
 // ignore: must_be_immutable
 class ReleaseRequirement2Page extends StatefulWidget {
@@ -8,6 +9,18 @@ class ReleaseRequirement2Page extends StatefulWidget {
   String ContactInfoTitle = '联系方式';
   List<String> ContactInfoStrs = ["隐私电话", "企业微信", "不限联系方式"];
   int ContactInfoSelectedIdx = 2;
+
+  /// 偏好联系时间
+  String preferredContactTimeTitile = '偏好联系时间';
+  List<String> preferredContactTimeStrs = [
+    "09:00-11:00",
+    "11:00-13:00",
+    "13:00-15:00",
+    "15:00-17:00",
+    "17:00-19:00",
+    "不限联系时间"
+  ];
+  int preferredContactTimeSelectedIdx = 5;
 
   /// 开票要求
   String InvoicingTitle = '开票要求';
@@ -122,12 +135,34 @@ class _ReleaseRequirement2PageState extends State<ReleaseRequirement2Page> {
             ),
             InkWell(
                 onTap: () {
-                  print("d333");
+                  showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12.0),
+                          topRight: Radius.circular(12.0),
+                        ),
+                      ),
+                      builder: (context) {
+                        return SelectTimeSheet(
+                          title: widget.preferredContactTimeTitile,
+                          selecteStrs: widget.preferredContactTimeStrs,
+                          selectedIdx: widget.preferredContactTimeSelectedIdx,
+                          onTap: (int newSelectedIndex) {
+                            setState(() {
+                              widget.preferredContactTimeSelectedIdx =
+                                  newSelectedIndex;
+                            });
+                          },
+                        );
+                      });
                 },
                 child: Row(
                   children: [
                     Text(
-                      '不限联系时间',
+                      widget.preferredContactTimeStrs[
+                          widget.preferredContactTimeSelectedIdx],
                       style: TextStyle(
                           fontFamily: 'PingFangSC-Regular',
                           fontSize: 13,
