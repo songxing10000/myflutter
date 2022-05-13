@@ -3,6 +3,8 @@ import 'HomeView.dart';
 import 'DetailView.dart';
 import 'CancelDemandPage.dart';
 import 'TabTest.dart';
+import 'ReleaseRequirement1Page.dart';
+
 import 'ReleaseRequirement2Page.dart';
 
 import 'ReleaseRequirement3Page.dart';
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
           '/detail': (BuildContext context) => const DetailView(),
           '/canCelDemand': (BuildContext context) => const CancelDemandPage(),
           '/TabTest': (BuildContext context) => const TabTestView(),
+          '/ReleaseRequirement1Page': (BuildContext context) =>
+              ReleaseRequirement1Page(),
           '/ReleaseRequirement2Page': (BuildContext context) =>
               ReleaseRequirement2Page(),
           '/ReleaseRequirement3Page': (BuildContext context) =>

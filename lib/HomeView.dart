@@ -37,7 +37,7 @@ class _HomeView extends State<HomeView> {
           TextButton(
             child: Text('发布需求4'),
             onPressed: () {
-              Navigator.of(context).pushNamed('/ReleaseRequirement2Page');
+              Navigator.of(context).pushNamed('/ReleaseRequirement1Page');
             },
           )
         ]));
