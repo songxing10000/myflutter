@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter/MyAppBar.dart';
+import 'SelectCategorySheet.dart';
 
+// ignore: must_be_immutable
 class ReleaseRequirement1Page extends StatefulWidget {
-  const ReleaseRequirement1Page({Key? key}) : super(key: key);
-
+  ReleaseRequirement1Page({Key? key}) : super(key: key);
   @override
   State<ReleaseRequirement1Page> createState() =>
       _ReleaseRequirement1PageState();
@@ -54,7 +55,7 @@ class _ReleaseRequirement1PageState extends State<ReleaseRequirement1Page> {
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
-        padding: const EdgeInsets.fromLTRB(16, 14, 12, 20),
+        padding: const EdgeInsets.fromLTRB(16, 14, 12, 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,23 +97,17 @@ class _ReleaseRequirement1PageState extends State<ReleaseRequirement1Page> {
                 border: InputBorder.none, // 不要底线
               ),
             ),
-            SizedBox(
-              height: 12,
-            ),
             Divider(
               height: 1,
               color: Color(0xffF5F6FA),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
             Text(
               '需求描述',
               style: TextStyle(
                   fontFamily: 'PingFangSC-Medium',
                   fontSize: 16,
                   color: Color(0xFF333333)),
-            ),
-            SizedBox(
-              height: 12,
             ),
             TextField(
               maxLines: null,
@@ -131,6 +126,51 @@ class _ReleaseRequirement1PageState extends State<ReleaseRequirement1Page> {
                 border: InputBorder.none, // 不要底线
               ),
             ),
+            Divider(
+              height: 1,
+              color: Color(0xffF5F6FA),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text(
+              '需求类型',
+              style: TextStyle(
+                  fontFamily: 'PingFangSC-Medium',
+                  fontSize: 16,
+                  color: Color(0xFF333333)),
+            ),
+            InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    builder: (context) {
+                      return SelectCategorySheet();
+                    },
+                    context: context,
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12.0),
+                        topRight: Radius.circular(12.0),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                    padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+                    child: Row(
+                      children: [
+                        Text(
+                          '请选择需求类型',
+                          style: TextStyle(
+                              fontFamily: 'PingFangSC-Regular',
+                              fontSize: 13,
+                              color: Color(0xFF999999)),
+                        ),
+                        Spacer(),
+                        Image.asset('images/iconright.png'),
+                      ],
+                    ))),
           ],
         ));
 
@@ -139,11 +179,12 @@ class _ReleaseRequirement1PageState extends State<ReleaseRequirement1Page> {
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
-        padding: const EdgeInsets.fromLTRB(16, 14, 12, 20),
+        padding: const EdgeInsets.fromLTRB(16, 14, 12, 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(children: [
-              Image.asset('images/icon_xingxixuqiuxinxi.png'),
+              Image.asset('images/icon_xuqiuyusuan.png'),
               SizedBox(width: 10),
               const Text(
                 '需求预算',
@@ -154,7 +195,33 @@ class _ReleaseRequirement1PageState extends State<ReleaseRequirement1Page> {
               ),
               Spacer(),
             ]),
-            const SizedBox(height: 8),
+            const SizedBox(height: 17),
+            Text(
+              '预算金额',
+              style: TextStyle(
+                  fontFamily: 'PingFangSC-Medium',
+                  fontSize: 16,
+                  color: Color(0xFF333333)),
+            ),
+            InkWell(
+                onTap: () {
+                  print("object");
+                },
+                child: Container(
+                    padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+                    child: Row(
+                      children: [
+                        Text(
+                          '请输入预算金额',
+                          style: TextStyle(
+                              fontFamily: 'PingFangSC-Regular',
+                              fontSize: 13,
+                              color: Color(0xFF999999)),
+                        ),
+                        Spacer(),
+                        Image.asset('images/iconright.png'),
+                      ],
+                    ))),
           ],
         ));
 
