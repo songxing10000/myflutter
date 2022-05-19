@@ -39,6 +39,12 @@ class _HomeView extends State<HomeView> {
             onPressed: () {
               Navigator.of(context).pushNamed('/ReleaseRequirement1Page');
             },
+          ),
+          TextButton(
+            child: Text('我的'),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/MinePage');
+            },
           )
         ]));
   }
