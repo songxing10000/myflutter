@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:myflutter/MyToolkitView.dart';
 import 'MineType1View.dart';
 import 'MineType2View.dart';
 import 'MyWalletView.dart';
+import 'MyCreationView.dart';
 
 class MinePage extends StatelessWidget {
   const MinePage({Key? key}) : super(key: key);
@@ -130,9 +132,54 @@ class MinePage extends StatelessWidget {
                       () {},
                       () {},
                     ]),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    MyCreationView(callback: () {}),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    MyToolkitView(title: '我的工具包', names: [
+                      '快速查询',
+                      '天气查询',
+                      '充值服务',
+                      '垃圾分类',
+                      '实时路况',
+                      '交通运输',
+                      '机票',
+                      '火车票',
+                      '反馈',
+                      '设置',
+                    ], imgNames: [
+                      '我的_快速查询',
+                      '我的_天气查询',
+                      '我的_充值服务',
+                      '我的_垃圾分类',
+                      '我的_实时路况',
+                      '我的_交通运输',
+                      '我的_机票',
+                      '我的_火车票',
+                      '我的_反馈',
+                      '我的_设置',
+                    ], callbacks: [
+                      () {},
+                      () {},
+                      () {},
+                      () {},
+                      () {},
+                      () {},
+                      () {},
+                      () {},
+                      () {},
+                      () {},
+                    ]),
+                    SizedBox(
+                      height: 53,
+                    )
                   ],
                 ))
           ]),
     )));
   }
 }
+// 
