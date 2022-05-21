@@ -45,6 +45,12 @@ class _HomeView extends State<HomeView> {
             onPressed: () {
               Navigator.of(context).pushNamed('/MinePage');
             },
+          ),
+          TextButton(
+            child: Text('两级联动'),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/TwoLevelLinkagePage');
+            },
           )
         ]));
   }

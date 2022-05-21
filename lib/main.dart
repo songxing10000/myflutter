@@ -11,6 +11,7 @@ import 'ReleaseRequirement3Page.dart';
 
 import 'ReleaseRequirement4Page.dart';
 import 'MinePage.dart';
+import 'TwoLevelLinkagePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,6 +39,8 @@ class MyApp extends StatelessWidget {
           '/ReleaseRequirement4Page': (BuildContext context) =>
               const ReleaseRequirement4Page(),
           '/MinePage': (BuildContext context) => const MinePage(),
+          '/TwoLevelLinkagePage': (BuildContext context) =>
+              const TwoLevelLinkagePage(),
         });
   }
 }

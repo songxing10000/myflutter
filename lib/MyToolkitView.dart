@@ -51,7 +51,7 @@ class MyToolkitView extends StatelessWidget {
               physics: new NeverScrollableScrollPhysics(), // 禁止滚动
 
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, //横轴三个子widget
+                crossAxisCount: 4, // 横轴三个子widget
                 mainAxisSpacing: 24,
                 crossAxisSpacing: 40,
               ),
