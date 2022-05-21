@@ -46,18 +46,20 @@ class NetUtil {
   }
 
   /// 用户登录
-  Future<TokenInfo> login(String phone, String pwd) async {
-    FormData formData = FormData.fromMap({
-      'grant_type': 'password',
-      'password': pwd,
-      'scope': 'all',
-      'username': phone
-    });
+  Future<TokenInfo> login(String? phone, String? pwd) async {
+    Map<String, String?> dict = Map();
+    dict['grant_type'] = 'password';
+    dict['password'] = pwd;
+    dict['scope'] = 'all';
+    dict['username'] = phone;
+
+    FormData formData = FormData.fromMap(dict);
 
     var r = await dio.post("https://college.91hilife.com/oauth2/oauth/token",
         data: formData);
 
     TokenInfo tokenObj = TokenInfo.fromJson(r.data);
+
     if (tokenObj.accessToken != null) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', tokenObj.accessToken!);
@@ -72,13 +74,13 @@ class NetUtil {
   Future<UserInfo> getUserInfo() async {
     final prefs = await SharedPreferences.getInstance();
     String? token = await prefs.getString('token');
-    Map<String, String> dict = Map();
-    if (token != null) {
-      dict['token'] = token;
-    }
+
+    Map<String, String?> dict = Map();
+    dict['token'] = token;
+
     FormData formData = FormData.fromMap(dict);
+
     var r = await dio.post("/api/cas/getUserInfoByToken", data: formData);
-    UserInfo user = UserInfo.fromJson(r.data);
-    return user;
+    return UserInfo.fromJson(r.data);
   }
 }
